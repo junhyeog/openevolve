@@ -11,9 +11,12 @@ language: "text"
 
 # LLM Configuration for Qwen3-8B via OpenRouter
 llm:
-  api_base: "https://openrouter.ai/api/v1"
+  # api_base: "https://openrouter.ai/api/v1"
+  api_base: "http://10.8.12.7:7002/v1/"
   models:
-    - name: "qwen/qwen3-8b"
+    # - name: "qwen/qwen3-8b"
+    - name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+    # - name: "moonshotai/kimi-k2:free"
       weight: 1.0
   
   temperature: 0.8  # Higher temperature for creative evolution

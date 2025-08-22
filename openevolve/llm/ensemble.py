@@ -31,11 +31,7 @@ class LLMEnsemble:
         # Set up random state for deterministic model selection
         self.random_state = random.Random()
         # Initialize with seed from first model's config if available
-        if (
-            models_cfg
-            and hasattr(models_cfg[0], "random_seed")
-            and models_cfg[0].random_seed is not None
-        ):
+        if models_cfg and hasattr(models_cfg[0], "random_seed") and models_cfg[0].random_seed is not None:
             self.random_state.seed(models_cfg[0].random_seed)
             logger.debug(
                 f"LLMEnsemble: Set random seed to {models_cfg[0].random_seed} for deterministic model selection"
@@ -45,10 +41,7 @@ class LLMEnsemble:
         if len(models_cfg) > 1 or not hasattr(logger, "_ensemble_logged"):
             logger.info(
                 f"Initialized LLM ensemble with models: "
-                + ", ".join(
-                    f"{model.name} (weight: {weight:.2f})"
-                    for model, weight in zip(models_cfg, self.weights)
-                )
+                + ", ".join(f"{model.name} (weight: {weight:.2f})" for model, weight in zip(models_cfg, self.weights))
             )
             logger._ensemble_logged = True
 
@@ -57,9 +50,7 @@ class LLMEnsemble:
         model = self._sample_model()
         return await model.generate(prompt, **kwargs)
 
-    async def generate_with_context(
-        self, system_message: str, messages: List[Dict[str, str]], **kwargs
-    ) -> str:
+    async def generate_with_context(self, system_message: str, messages: List[Dict[str, str]], **kwargs) -> str:
         """Generate text using a system message and conversational context"""
         model = self._sample_model()
         return await model.generate_with_context(system_message, messages, **kwargs)
@@ -81,9 +72,7 @@ class LLMEnsemble:
         tasks = [self.generate(prompt, **kwargs) for prompt in prompts]
         return await asyncio.gather(*tasks)
 
-    async def generate_all_with_context(
-        self, system_message: str, messages: List[Dict[str, str]], **kwargs
-    ) -> str:
+    async def generate_all_with_context(self, system_message: str, messages: List[Dict[str, str]], **kwargs) -> str:
         """Generate text using a all available models and average their returned metrics"""
         responses = []
         for model in self.models:

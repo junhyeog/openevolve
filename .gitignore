@@ -1,6 +1,9 @@
 results/
 examples/lm_eval/prompts/system_message.txt
 examples/lm_eval/prompts/evaluator_system_message.txt
+runs
+quant_apps
+uv.lock
 
 # Python
 __pycache__/

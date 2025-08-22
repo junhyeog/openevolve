@@ -18,6 +18,8 @@ dependencies = [
     "numpy>=1.22.0",
     "tqdm>=4.64.0",
     "flask",
+    "lm-eval>=0.4.9.1",
+    "ipdb>=0.13.13",
 ]
 
 [project.optional-dependencies]
